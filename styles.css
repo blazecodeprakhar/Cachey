@@ -548,8 +548,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .stat-lbl {
+  display: block;
   font-size: 0.78rem;
   color: var(--text-muted);
+  white-space: nowrap;
+  margin-top: 2px;
 }
 
 .hero-card-features {
