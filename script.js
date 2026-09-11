@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const filename = btn.getAttribute('download') || (href ? href.split('/').pop() : '');
 
       if (btn.classList.contains('download-exe-trigger')) {
-        showToast('Downloading Cachey-v3.3.zip (37.8 MB)...', 'fa-file-arrow-down');
+        showToast('Downloading Cachey.exe (38.1 MB)...', 'fa-file-arrow-down');
       } else if (filename) {
         showToast(`Downloading ${filename}...`, 'fa-file-arrow-down');
       }
