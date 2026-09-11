@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // Download Handlers - Ensure immediate downloading feedback for all download buttons
-  const downloadBtns = document.querySelectorAll('.download-exe-trigger, .download-zip-trigger, [download], a[href$=".zip"], a[href$=".exe"], a[href$=".py"], a[href$=".txt"]');
+  const downloadBtns = document.querySelectorAll('.download-exe-trigger, [download], a[href$=".zip"], a[href$=".exe"], a[href$=".py"], a[href$=".txt"]');
   
   downloadBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -35,8 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (btn.classList.contains('download-exe-trigger')) {
         showToast('Downloading Cachey-v3.3.zip (37.8 MB)...', 'fa-file-arrow-down');
-      } else if (btn.classList.contains('download-zip-trigger')) {
-        showToast('Downloading cachey-v3.3-source.zip...', 'fa-file-zipper');
       } else if (filename) {
         showToast(`Downloading ${filename}...`, 'fa-file-arrow-down');
       }
