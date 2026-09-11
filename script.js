@@ -16,24 +16,24 @@ document.addEventListener('DOMContentLoaded', () => {
     resize();
     window.addEventListener('resize', resize);
 
-    // 150 Twinkling Background Space Stars
+    // Gentle Twinkling Background Space Stars
     const backgroundStars = [];
-    const starCount = Math.min(220, Math.floor((width * height) / 7000));
+    const starCount = Math.min(90, Math.floor((width * height) / 18000));
 
     for (let i = 0; i < starCount; i++) {
       backgroundStars.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        radius: Math.random() * 1.6 + 0.4,
-        alpha: Math.random() * 0.7 + 0.2,
-        speed: Math.random() * 0.015 + 0.005,
+        radius: Math.random() * 1.4 + 0.3,
+        alpha: Math.random() * 0.6 + 0.15,
+        speed: Math.random() * 0.008 + 0.003,
         direction: Math.random() > 0.5 ? 1 : -1
       });
     }
 
-    // 25 High-Speed Blurring Shooting Meteors
+    // 8 Elegant, Slow-Gliding Shooting Meteors
     const shootingStars = [];
-    const shootingStarCount = 25;
+    const shootingStarCount = 8;
     const angle = Math.PI / 4; // Uniform 45-degree trajectory
 
     class ShootingStar {
@@ -44,21 +44,21 @@ document.addEventListener('DOMContentLoaded', () => {
       reset(initial = false) {
         // Spawn along top or right boundaries
         if (Math.random() > 0.4) {
-          this.x = Math.random() * (width + 600) - 200;
-          this.y = initial ? Math.random() * height * 0.85 : -120;
+          this.x = Math.random() * (width + 400) - 200;
+          this.y = initial ? Math.random() * height * 0.85 : -100;
         } else {
-          this.x = width + 150;
-          this.y = Math.random() * (height + 500) - 200;
+          this.x = width + 100;
+          this.y = Math.random() * (height + 400) - 200;
         }
 
-        this.length = Math.random() * 180 + 150; // Long blurry glowing tail (150px to 330px)
-        this.speed = Math.random() * 18 + 16;     // Fast meteor speed (16px to 34px/frame)
-        this.size = Math.random() * 2.4 + 1.2;    // Meteor head radius
-        this.alpha = Math.random() * 0.7 + 0.3;   // Opacity
+        this.length = Math.random() * 120 + 90;  // Elegant blurry tail (90px to 210px)
+        this.speed = Math.random() * 4 + 3.5;     // Smooth, gentle glide speed (3.5px to 7.5px/frame)
+        this.size = Math.random() * 1.8 + 1.0;    // Meteor head radius
+        this.alpha = Math.random() * 0.5 + 0.25;  // Soft opacity
         this.life = 0;
-        this.maxLife = Math.random() * 90 + 70;
+        this.maxLife = Math.random() * 150 + 110;
         this.colorHead = '#ffffff';
-        this.colorMid = Math.random() > 0.45 ? '#38bdf8' : '#c084fc'; // Electric Cyan or Deep Purple glow
+        this.colorMid = Math.random() > 0.5 ? '#38bdf8' : '#c084fc'; // Cyan or Purple glow
       }
 
       update() {
@@ -66,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
         this.y += Math.sin(angle) * this.speed;
         this.life++;
 
-        if (this.life > this.maxLife * 0.65) {
-          this.alpha -= 0.035;
+        if (this.life > this.maxLife * 0.7) {
+          this.alpha -= 0.015;
         }
 
         if (this.x < -this.length || this.y > height + this.length || this.alpha <= 0) {
