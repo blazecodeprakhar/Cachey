@@ -1,6 +1,6 @@
 """
-HyperClean Studio - Standalone Executable Builder
-Run this script to package HyperClean Studio into a single portable Windows .exe file
+Cachey - Standalone Executable Builder
+Run this script to package Cachey into a single portable Windows .exe file
 that can be downloaded and run by anyone without needing Python installed!
 Usage:
     python build_exe.py
@@ -19,7 +19,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 def build():
 
-    print("⚡ Building HyperClean Studio Standalone Windows Executable...")
+    print("⚡ Building Cachey Standalone Windows Executable...")
     try:
         import PyInstaller
     except ImportError:
@@ -30,9 +30,9 @@ def build():
     import shutil
     import ctypes
 
-    root_exe = "HyperCleanStudio.exe"
+    root_exe = "Cachey.exe"
     try:
-        subprocess.run(["taskkill", "/F", "/IM", "HyperCleanStudio.exe"], capture_output=True)
+        subprocess.run(["taskkill", "/F", "/IM", "Cachey.exe"], capture_output=True)
     except Exception:
         pass
 
@@ -60,7 +60,7 @@ def build():
         "--noconfirm",
         "--onefile",
         "--windowed",
-        "--name=HyperCleanStudio",
+        "--name=Cachey",
         "--collect-all=customtkinter",
         "--clean",
     ] + icon_args + ["main.py"]
@@ -69,7 +69,7 @@ def build():
     print(" ".join(cmd))
     subprocess.run(cmd, check=True)
 
-    dist_exe = os.path.join("dist", "HyperCleanStudio.exe")
+    dist_exe = os.path.join("dist", "Cachey.exe")
     if os.path.exists(dist_exe):
         try:
             shutil.copy(dist_exe, root_exe)
@@ -77,7 +77,7 @@ def build():
             print(f"Warning copying to root: {e}")
 
     # Post-build cleanup of unwanted build files
-    for item in ["build", "dist", "HyperCleanStudio.spec"]:
+    for item in ["build", "dist", "Cachey.spec"]:
         if os.path.isfile(item):
             os.remove(item)
         elif os.path.isdir(item):

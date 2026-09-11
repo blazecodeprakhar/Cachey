@@ -1,5 +1,5 @@
 """
-HyperClean Studio - Simple & Safe Clean Confirmation Modal
+Cachey - Simple & Safe Clean Confirmation Modal
 Provides a clear, friendly, and non-intimidating file cleanup confirmation dialog.
 Displays target names, paths, total storage size to be freed, and reassurance.
 """
@@ -18,7 +18,7 @@ class CleanConfirmationModal(ctk.CTkToplevel):
         self.targets = targets
         self.on_confirm_callback = on_confirm
 
-        self.title("🧹 Confirm System Cleanup - HyperClean Studio")
+        self.title("🧹 Confirm System Cleanup - Cachey")
         self.geometry("660x540")
         self.minsize(600, 480)
         self.resizable(True, True)

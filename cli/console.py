@@ -1,5 +1,5 @@
 """
-HyperClean Studio - Rich Terminal CLI Runner
+Cachey - Rich Terminal CLI Runner
 Provides interactive terminal scanning and cleanup using Rich tables and progress bars.
 """
 
@@ -30,7 +30,7 @@ console = Console(force_terminal=True, legacy_windows=False)
 def run_cli_scan() -> ScanResult:
     console.print(
         Panel.fit(
-            "[bold cyan]⚡ HyperClean Studio[/bold cyan] - [dim]Master System & Developer Cache Cleaner[/dim]",
+            "[bold cyan]⚡ Cachey[/bold cyan] - [dim]Master System & Developer Cache Cleaner[/dim]",
             border_style="blue",
         )
     )

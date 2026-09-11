@@ -1,4 +1,4 @@
-# ⚡ HyperClean Studio - Performance & Gaming Suite
+# ⚡ Cachey - Performance & Gaming Suite
 
 <p align="center">
   <img src="https://img.shields.io/badge/Author-blazecodeprakhar-blueviolet?style=for-the-badge&logo=github" alt="Author" />
@@ -12,7 +12,7 @@
 
 ## 🌟 Overview
 
-**HyperClean Studio** is an all-in-one Windows disk cleanup and performance booster built by **[blazecodeprakhar](https://github.com/blazecodeprakhar)**. It reclaims massive disk space by targeting heavy developer build caches, system junk, browser storage, and uninstalled app leftovers, while featuring a **One-Click Game & RAM Booster** that flushes GPU shader caches and trims process RAM memory safely.
+**Cachey** is an all-in-one Windows disk cleanup and performance booster built by **[blazecodeprakhar](https://github.com/blazecodeprakhar)**. It reclaims massive disk space by targeting heavy developer build caches, system junk, browser storage, and uninstalled app leftovers, while featuring a **One-Click Game & RAM Booster** that flushes GPU shader caches and trims process RAM memory safely.
 
 ---
 
@@ -47,8 +47,8 @@
 
 ```bash
 # Clone repository
-git clone https://github.com/blazecodeprakhar/hyperclean-studio.git
-cd hyperclean-studio
+git clone https://github.com/blazecodeprakhar/Cachey.git
+cd Cachey
 
 # Install dependencies
 pip install -r requirements.txt
@@ -59,12 +59,12 @@ python main.py
 
 ### 📦 Build Standalone Executable (.exe)
 
-Want to distribute HyperClean Studio on the Internet so anyone can run it without Python? Run:
+Want to distribute Cachey on the Internet so anyone can run it without Python? Run:
 
 ```bash
 python build_exe.py
 ```
-Your single portable executable will be generated in `dist/HyperCleanStudio.exe`!
+Your single portable executable will be generated in `dist/Cachey.exe`!
 
 ---
 

@@ -1,5 +1,5 @@
 """
-HyperClean Studio - Main Application Launcher
+Cachey - Main Application Launcher
 Usage:
     python main.py              # Launch Modern GUI Application
     python main.py --cli scan   # Launch Terminal Scan
@@ -20,7 +20,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="HyperClean Studio - Master Cache & Junk Cleaner")
+    parser = argparse.ArgumentParser(description="Cachey - Master Cache & Junk Cleaner")
     parser.add_argument("--cli", choices=["scan", "clean"], help="Run in Terminal CLI mode")
     parser.add_argument("--dry-run", action="store_true", help="Simulate cleanup without deleting files")
 

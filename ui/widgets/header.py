@@ -1,5 +1,5 @@
 """
-HyperClean Studio - Header Component
+Cachey - Header Component
 App banner, Admin privilege badge, live C: drive storage progress bar, and primary scan/clean controls.
 """
 
@@ -35,7 +35,7 @@ class HeaderFrame(ctk.CTkFrame):
 
         self.lbl_title = ctk.CTkLabel(
             title_frame,
-            text="⚡ HyperClean Studio",
+            text="⚡ Cachey",
             font=Theme.FONT_HEADER,
             text_color=Theme.TEXT_MAIN,
         )
