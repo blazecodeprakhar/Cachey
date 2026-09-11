@@ -1,5 +1,5 @@
 """
-Cachey - Main Application Window (v2.0 Performance & Gaming Suite)
+Cachey - Main Application Window (v3.3 Performance & Gaming Suite)
 Assembles header, stat metrics cards, interactive category file tree, Game & RAM booster tab, and large files reclaimer tab.
 """
 
@@ -24,7 +24,7 @@ class HyperCleanApp(ctk.CTk):
         super().__init__()
 
         # Window Setup
-        self.title("Cachey v2.0 - Performance & Gaming Suite")
+        self.title("Cachey v3.3 - Performance & Gaming Suite")
         self.geometry("1140x780")
         self.minsize(1000, 700)
         self.configure(fg_color=Theme.BG_DARK)

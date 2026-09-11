@@ -1,4 +1,4 @@
-// Cachey v2.0 - Formal Corporate Website Script
+// Cachey v3.3 - Formal Corporate Website Script
 document.addEventListener('DOMContentLoaded', () => {
 
   // Toast Notification System
@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const filename = btn.getAttribute('download') || (href ? href.split('/').pop() : '');
 
       if (btn.classList.contains('download-exe-trigger')) {
-        showToast('Downloading Cachey-v2.0.zip (37.8 MB)...', 'fa-file-arrow-down');
+        showToast('Downloading Cachey-v3.3.zip (37.8 MB)...', 'fa-file-arrow-down');
       } else if (btn.classList.contains('download-zip-trigger')) {
-        showToast('Downloading cachey-v2.0-source.zip...', 'fa-file-zipper');
+        showToast('Downloading cachey-v3.3-source.zip...', 'fa-file-zipper');
       } else if (filename) {
         showToast(`Downloading ${filename}...`, 'fa-file-arrow-down');
       }
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isRunning = false;
 
     const scanSteps = [
-      { text: "[INIT] Initializing Cachey v2.0 Detector Engine...", delay: 200 },
+      { text: "[INIT] Initializing Cachey v3.3 Detector Engine...", delay: 200 },
       { text: "[AUDIT] Launching Safety Confirmation Modal & File Target Audit...", delay: 400 },
       { text: "[CHECK] Verifying file target list, caution item badges, and safety confirmation checkbox...", delay: 650 },
       { text: "[MEM] Invoking Win32 EmptyWorkingSet API across 42 active background processes...", delay: 950 },
