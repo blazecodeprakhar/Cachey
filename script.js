@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // 8 Elegant, Slow-Gliding Shooting Meteors
+    // 8 Light, Infinite-Path Shooting Meteors
     const shootingStars = [];
     const shootingStarCount = 8;
     const angle = Math.PI / 4; // Uniform 45-degree trajectory
@@ -42,36 +42,38 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       reset(initial = false) {
-        // Spawn along top or right boundaries
-        if (Math.random() > 0.4) {
-          this.x = Math.random() * (width + 400) - 200;
-          this.y = initial ? Math.random() * height * 0.85 : -100;
+        // Always spawn outside top or right screen boundary
+        if (Math.random() > 0.5) {
+          this.x = Math.random() * (width + 600) - 100;
+          this.y = -150;
         } else {
-          this.x = width + 100;
+          this.x = width + 150;
           this.y = Math.random() * (height + 400) - 200;
         }
 
-        this.length = Math.random() * 120 + 90;  // Elegant blurry tail (90px to 210px)
-        this.speed = Math.random() * 4 + 3.5;     // Smooth, gentle glide speed (3.5px to 7.5px/frame)
-        this.size = Math.random() * 1.8 + 1.0;    // Meteor head radius
-        this.alpha = Math.random() * 0.5 + 0.25;  // Soft opacity
-        this.life = 0;
-        this.maxLife = Math.random() * 150 + 110;
+        // On initial page load, distribute along trajectory so meteors are already gliding
+        if (initial) {
+          const progress = Math.random() * Math.max(width, height);
+          this.x -= Math.cos(angle) * progress;
+          this.y += Math.sin(angle) * progress;
+        }
+
+        this.length = Math.random() * 240 + 160;  // Long, light blurry tail (160px to 400px)
+        this.speed = Math.random() * 3.5 + 2.5;    // Smooth, light gliding speed (2.5px to 6.0px/frame)
+        this.size = Math.random() * 1.5 + 0.8;    // Subtle meteor head radius
+        this.alpha = Math.random() * 0.35 + 0.15;  // Light subtle opacity
         this.colorHead = '#ffffff';
-        this.colorMid = Math.random() > 0.5 ? '#38bdf8' : '#c084fc'; // Cyan or Purple glow
+        this.colorMid = Math.random() > 0.5 ? '#38bdf8' : '#a855f7'; // Cyan or Purple glow
       }
 
       update() {
+        // Continuous travel across entire screen
         this.x -= Math.cos(angle) * this.speed;
         this.y += Math.sin(angle) * this.speed;
-        this.life++;
 
-        if (this.life > this.maxLife * 0.7) {
-          this.alpha -= 0.015;
-        }
-
-        if (this.x < -this.length || this.y > height + this.length || this.alpha <= 0) {
-          this.reset();
+        // Reset ONLY when completely outside screen boundaries (infinite continuous trail)
+        if (this.x < -this.length * 2 || this.y > height + this.length * 2) {
+          this.reset(false);
         }
       }
 

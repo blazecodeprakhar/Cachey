@@ -724,7 +724,7 @@ h1, h2, h3, h4, h5, h6 {
 .feature-list {
   list-style: none;
   display: flex;
-  flex-direction: flex-direction;
+  flex-direction: column;
   gap: 10px;
 }
 
