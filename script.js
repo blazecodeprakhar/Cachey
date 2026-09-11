@@ -16,18 +16,20 @@ document.addEventListener('DOMContentLoaded', () => {
     resize();
     window.addEventListener('resize', resize);
 
-    // Gentle Twinkling Background Space Stars
+    // Gentle Twinkling Background Space Stars & Galaxy Dust
     const backgroundStars = [];
-    const starCount = Math.min(90, Math.floor((width * height) / 18000));
+    const starCount = Math.min(120, Math.floor((width * height) / 14000));
+    const starColors = ['#ffffff', '#38bdf8', '#c084fc', '#34d399', '#7dd3fc'];
 
     for (let i = 0; i < starCount; i++) {
       backgroundStars.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        radius: Math.random() * 1.4 + 0.3,
-        alpha: Math.random() * 0.6 + 0.15,
+        radius: Math.random() * 1.5 + 0.3,
+        alpha: Math.random() * 0.7 + 0.15,
         speed: Math.random() * 0.008 + 0.003,
-        direction: Math.random() > 0.5 ? 1 : -1
+        direction: Math.random() > 0.5 ? 1 : -1,
+        color: starColors[Math.floor(Math.random() * starColors.length)]
       });
     }
 
@@ -112,6 +114,54 @@ document.addEventListener('DOMContentLoaded', () => {
       shootingStars.push(new ShootingStar());
     }
 
+    // Prominent 4-Point Cross Sparkle Flare Stars (Matching Screenshots)
+    const flareStars = [
+      { xRatio: 0.18, yRatio: 0.44, color: '#38bdf8', size: 14, alpha: 0.85, speed: 0.005, dir: 1 },
+      { xRatio: 0.82, yRatio: 0.22, color: '#c084fc', size: 16, alpha: 0.90, speed: 0.004, dir: -1 },
+      { xRatio: 0.10, yRatio: 0.72, color: '#38bdf8', size: 12, alpha: 0.78, speed: 0.006, dir: 1 },
+      { xRatio: 0.86, yRatio: 0.58, color: '#34d399', size: 14, alpha: 0.82, speed: 0.005, dir: -1 },
+      { xRatio: 0.50, yRatio: 0.85, color: '#c084fc', size: 11, alpha: 0.70, speed: 0.007, dir: 1 }
+    ];
+
+    function drawCrossFlareStar(x, y, size, color, alpha) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.shadowBlur = 12;
+      ctx.shadowColor = color;
+
+      // Horizontal beam
+      let gradH = ctx.createLinearGradient(x - size, y, x + size, y);
+      gradH.addColorStop(0, 'rgba(255, 255, 255, 0)');
+      gradH.addColorStop(0.5, color);
+      gradH.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.strokeStyle = gradH;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(x - size, y);
+      ctx.lineTo(x + size, y);
+      ctx.stroke();
+
+      // Vertical beam
+      let gradV = ctx.createLinearGradient(x, y - size, x, y + size);
+      gradV.addColorStop(0, 'rgba(255, 255, 255, 0)');
+      gradV.addColorStop(0.5, color);
+      gradV.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.strokeStyle = gradV;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(x, y - size);
+      ctx.lineTo(x, y + size);
+      ctx.stroke();
+
+      // Central white core
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(x, y, 1.8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
+
     function animate() {
       ctx.clearRect(0, 0, width, height);
 
@@ -123,13 +173,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         ctx.save();
-        ctx.shadowBlur = 5;
-        ctx.shadowColor = '#38bdf8';
-        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+        ctx.shadowBlur = star.radius > 1.0 ? 8 : 4;
+        ctx.shadowColor = star.color;
+        ctx.fillStyle = star.color === '#ffffff' ? `rgba(255, 255, 255, ${star.alpha})` : star.color;
+        ctx.globalAlpha = star.alpha;
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
+      });
+
+      // Render 4-point cross flare stars (from screenshots)
+      flareStars.forEach(fStar => {
+        fStar.alpha += fStar.speed * fStar.dir;
+        if (fStar.alpha >= 0.95 || fStar.alpha <= 0.3) {
+          fStar.dir *= -1;
+        }
+        const fx = fStar.xRatio * width;
+        const fy = fStar.yRatio * height;
+        drawCrossFlareStar(fx, fy, fStar.size, fStar.color, fStar.alpha);
       });
 
       // Render shooting stars

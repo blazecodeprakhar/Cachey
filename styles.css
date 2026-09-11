@@ -7,14 +7,14 @@
 
 :root {
   /* Futuristic Dark Theme Color Tokens */
-  --bg-dark: #030712;
-  --bg-card: rgba(15, 23, 42, 0.65);
-  --bg-card-hover: rgba(30, 41, 59, 0.75);
+  --bg-dark: #02040a;
+  --bg-card: rgba(8, 12, 22, 0.75);
+  --bg-card-hover: rgba(18, 26, 44, 0.8);
   --bg-glass-pill: rgba(255, 255, 255, 0.04);
   
-  --border-glass: rgba(255, 255, 255, 0.08);
-  --border-cyan: rgba(56, 189, 248, 0.3);
-  --border-emerald: rgba(52, 211, 153, 0.3);
+  --border-glass: rgba(255, 255, 255, 0.07);
+  --border-cyan: rgba(56, 189, 248, 0.28);
+  --border-emerald: rgba(52, 211, 153, 0.28);
   
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
@@ -26,9 +26,9 @@
   --accent-purple: #c084fc;
   --accent-amber: #fbbf24;
   
-  --glow-cyan: rgba(56, 189, 248, 0.25);
-  --glow-emerald: rgba(52, 211, 153, 0.25);
-  --glow-purple: rgba(192, 132, 252, 0.2);
+  --glow-cyan: rgba(56, 189, 248, 0.2);
+  --glow-emerald: rgba(52, 211, 153, 0.2);
+  --glow-purple: rgba(192, 132, 252, 0.18);
   
   --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -56,6 +56,7 @@ html {
 body {
   font-family: var(--font-sans);
   background-color: var(--bg-dark);
+  background-image: radial-gradient(ellipse at 50% 0%, #050b18 0%, #02040a 70%);
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
@@ -85,43 +86,59 @@ body {
   z-index: 1;
 }
 
+/* Deep Space Cosmic Aurora Arcs & Galaxy Light Lighting (Matching Screenshots) */
 .ambient-glow-1 {
   position: absolute;
-  top: -10%;
-  left: 20%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(3, 7, 18, 0) 70%);
-  filter: blur(80px);
-  animation: pulseGlow 12s ease-in-out infinite alternate;
+  top: -15%;
+  left: -12%;
+  width: 900px;
+  height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(168, 85, 247, 0.20) 0%, rgba(99, 102, 241, 0.10) 35%, rgba(56, 189, 248, 0.04) 60%, transparent 75%);
+  filter: blur(95px);
+  animation: auroraPulse 14s ease-in-out infinite alternate;
 }
 
 .ambient-glow-2 {
   position: absolute;
-  top: 40%;
-  right: -5%;
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, rgba(3, 7, 18, 0) 70%);
+  top: 10%;
+  right: -14%;
+  width: 850px;
+  height: 850px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 65% 35%, rgba(56, 189, 248, 0.22) 0%, rgba(20, 184, 166, 0.10) 40%, rgba(168, 85, 247, 0.04) 65%, transparent 75%);
   filter: blur(100px);
-  animation: pulseGlow 15s ease-in-out infinite alternate-reverse;
+  animation: auroraPulse 16s ease-in-out infinite alternate-reverse;
 }
 
 .ambient-glow-3 {
   position: absolute;
-  bottom: 5%;
-  left: -5%;
-  width: 650px;
+  bottom: -18%;
+  right: 5%;
+  width: 950px;
   height: 650px;
-  background: radial-gradient(circle, rgba(52, 211, 153, 0.12) 0%, rgba(3, 7, 18, 0) 70%);
-  filter: blur(90px);
-  animation: pulseGlow 10s ease-in-out infinite alternate;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 90%, rgba(79, 70, 229, 0.18) 0%, rgba(168, 85, 247, 0.10) 40%, rgba(56, 189, 248, 0.04) 65%, transparent 75%);
+  filter: blur(95px);
+  animation: auroraPulse 12s ease-in-out infinite alternate;
 }
 
-@keyframes pulseGlow {
-  0% { transform: scale(1) translate(0, 0); opacity: 0.8; }
-  50% { transform: scale(1.15) translate(30px, -20px); opacity: 1; }
-  100% { transform: scale(0.95) translate(-20px, 30px); opacity: 0.7; }
+.ambient-glow-4 {
+  position: absolute;
+  bottom: -10%;
+  left: -10%;
+  width: 750px;
+  height: 750px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 60%, rgba(52, 211, 153, 0.15) 0%, rgba(56, 189, 248, 0.08) 40%, transparent 70%);
+  filter: blur(105px);
+  animation: auroraPulse 18s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes auroraPulse {
+  0% { transform: scale(1) translate(0, 0) rotate(0deg); opacity: 0.85; }
+  50% { transform: scale(1.12) translate(30px, -20px) rotate(3deg); opacity: 1; }
+  100% { transform: scale(0.94) translate(-20px, 25px) rotate(-3deg); opacity: 0.78; }
 }
 
 .shooting-star:nth-child(1) { left: 20%; animation-delay: 0s; animation-duration: 4s; }
@@ -510,6 +527,24 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.35rem;
   font-weight: 800;
   color: var(--accent-cyan);
+}
+
+.stat-sub-pill {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid var(--border-cyan);
+  padding: 2px 8px;
+  border-radius: 100px;
+  margin: 3px 0 5px 0;
+}
+
+.stat-sub-cyan {
+  color: var(--accent-emerald);
+  background: rgba(52, 211, 153, 0.12);
+  border-color: var(--border-emerald);
 }
 
 .stat-lbl {
