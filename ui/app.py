@@ -19,8 +19,19 @@ from core.models import ScanResult, CleanTarget, CleanProgressReport
 from core.utils import format_size, get_disk_info
 
 
+import os
+import sys
+import ctypes
+
 class HyperCleanApp(ctk.CTk):
     def __init__(self):
+        # Set AppUserModelID on Windows so taskbar uses the custom icon instead of generic Python icon
+        if sys.platform == "win32":
+            try:
+                ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("blazecodeprakhar.cachey.app.v33")
+            except Exception:
+                pass
+
         super().__init__()
 
         # Window Setup
@@ -29,10 +40,20 @@ class HyperCleanApp(ctk.CTk):
         self.minsize(1000, 700)
         self.configure(fg_color=Theme.BG_DARK)
 
-        import os
+        # Set Window Titlebar & Taskbar Icon
         if os.path.exists("app_icon.ico"):
             try:
                 self.iconbitmap("app_icon.ico")
+            except Exception:
+                pass
+
+        if os.path.exists("app_icon.png"):
+            try:
+                from PIL import Image, ImageTk
+                img = Image.open("app_icon.png")
+                photo = ImageTk.PhotoImage(img)
+                self.iconphoto(True, photo)
+                self._icon_photo = photo
             except Exception:
                 pass
 
