@@ -17,6 +17,32 @@ except ImportError:
     PYWIN32_AVAILABLE = False
 
 
+def get_resource_path(relative_path: str) -> str:
+    """
+    Get absolute path to resource, working seamlessly both in development 
+    and in PyInstaller standalone onefile executable bundles (sys._MEIPASS).
+    """
+    # 1. PyInstaller bundled asset location
+    if hasattr(sys, "_MEIPASS"):
+        bundle_path = os.path.join(sys._MEIPASS, relative_path)
+        if os.path.exists(bundle_path):
+            return bundle_path
+
+    # 2. Directory containing the running executable
+    if getattr(sys, "frozen", False):
+        exe_dir = os.path.dirname(os.path.abspath(sys.executable))
+        exe_asset = os.path.join(exe_dir, relative_path)
+        if os.path.exists(exe_asset):
+            return exe_asset
+
+    # 3. Current working directory / script directory
+    cwd_asset = os.path.abspath(relative_path)
+    if os.path.exists(cwd_asset):
+        return cwd_asset
+
+    return relative_path
+
+
 def format_size(size_bytes: int) -> str:
     """Format bytes into human-readable string (e.g., 1.45 GB, 230 MB)."""
     if size_bytes <= 0:

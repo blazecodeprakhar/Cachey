@@ -8,7 +8,7 @@ import webbrowser
 import customtkinter as ctk
 from PIL import Image
 from ui.theme import Theme
-from core.utils import is_admin, get_disk_info
+from core.utils import is_admin, get_disk_info, get_resource_path
 
 
 class HeaderFrame(ctk.CTkFrame):
@@ -35,9 +35,10 @@ class HeaderFrame(ctk.CTkFrame):
         title_frame = ctk.CTkFrame(self.left_box, fg_color="transparent")
         title_frame.pack(anchor="w")
 
-        if os.path.exists("app_icon.png"):
+        png_path = get_resource_path("app_icon.png")
+        if os.path.exists(png_path):
             try:
-                pil_img = Image.open("app_icon.png")
+                pil_img = Image.open(png_path)
                 self.app_icon_img = ctk.CTkImage(light_image=pil_img, dark_image=pil_img, size=(28, 28))
                 self.lbl_icon = ctk.CTkLabel(title_frame, image=self.app_icon_img, text="")
                 self.lbl_icon.pack(side="left", padx=(0, 8))

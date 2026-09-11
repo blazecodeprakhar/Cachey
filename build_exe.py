@@ -53,6 +53,12 @@ def build():
     icon_path = os.path.abspath("app_icon.ico")
     icon_args = [f"--icon={icon_path}"] if os.path.exists(icon_path) else []
 
+    add_data_args = []
+    if os.path.exists("app_icon.ico"):
+        add_data_args.append("--add-data=app_icon.ico;.")
+    if os.path.exists("app_icon.png"):
+        add_data_args.append("--add-data=app_icon.png;.")
+
     cmd = [
         sys.executable,
         "-m",
@@ -63,7 +69,7 @@ def build():
         "--name=Cachey",
         "--collect-all=customtkinter",
         "--clean",
-    ] + icon_args + ["main.py"]
+    ] + add_data_args + icon_args + ["main.py"]
 
     print("Running PyInstaller fresh build command:")
     print(" ".join(cmd))

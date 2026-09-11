@@ -16,7 +16,7 @@ from ui.widgets.clean_progress import CleanProgressModal
 from core.scanner import SystemScanner
 from core.cleaner import SystemCleaner
 from core.models import ScanResult, CleanTarget, CleanProgressReport
-from core.utils import format_size, get_disk_info
+from core.utils import format_size, get_disk_info, get_resource_path
 
 
 import os
@@ -40,17 +40,19 @@ class HyperCleanApp(ctk.CTk):
         self.minsize(1000, 700)
         self.configure(fg_color=Theme.BG_DARK)
 
-        # Set Window Titlebar & Taskbar Icon
-        if os.path.exists("app_icon.ico"):
+        # Set Window Titlebar & Taskbar Icon via PyInstaller bundle path resolution
+        ico_path = get_resource_path("app_icon.ico")
+        if os.path.exists(ico_path):
             try:
-                self.iconbitmap("app_icon.ico")
+                self.iconbitmap(ico_path)
             except Exception:
                 pass
 
-        if os.path.exists("app_icon.png"):
+        png_path = get_resource_path("app_icon.png")
+        if os.path.exists(png_path):
             try:
                 from PIL import Image, ImageTk
-                img = Image.open("app_icon.png")
+                img = Image.open(png_path)
                 photo = ImageTk.PhotoImage(img)
                 self.iconphoto(True, photo)
                 self._icon_photo = photo
