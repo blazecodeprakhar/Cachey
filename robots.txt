@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://cachey-five.vercel.app/sitemap.xml
 Sitemap: https://blazecodeprakhar.github.io/Cachey/sitemap.xml
