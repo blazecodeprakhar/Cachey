@@ -1,7 +1,148 @@
-// Cachey v3.3 - Formal Corporate Website Script
+// Cachey v3.3 - High-Performance Future Tech Website Engine
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Toast Notification System
+  // 1. High-Performance 60 FPS Shooting Stars & Twinkling Starfield Canvas Engine
+  (function initStarfieldCanvas() {
+    const canvas = document.getElementById('shooting-stars-canvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let width, height;
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // 150 Twinkling Background Space Stars
+    const backgroundStars = [];
+    const starCount = Math.min(220, Math.floor((width * height) / 7000));
+
+    for (let i = 0; i < starCount; i++) {
+      backgroundStars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.6 + 0.4,
+        alpha: Math.random() * 0.7 + 0.2,
+        speed: Math.random() * 0.015 + 0.005,
+        direction: Math.random() > 0.5 ? 1 : -1
+      });
+    }
+
+    // 25 High-Speed Blurring Shooting Meteors
+    const shootingStars = [];
+    const shootingStarCount = 25;
+    const angle = Math.PI / 4; // Uniform 45-degree trajectory
+
+    class ShootingStar {
+      constructor() {
+        this.reset(true);
+      }
+
+      reset(initial = false) {
+        // Spawn along top or right boundaries
+        if (Math.random() > 0.4) {
+          this.x = Math.random() * (width + 600) - 200;
+          this.y = initial ? Math.random() * height * 0.85 : -120;
+        } else {
+          this.x = width + 150;
+          this.y = Math.random() * (height + 500) - 200;
+        }
+
+        this.length = Math.random() * 180 + 150; // Long blurry glowing tail (150px to 330px)
+        this.speed = Math.random() * 18 + 16;     // Fast meteor speed (16px to 34px/frame)
+        this.size = Math.random() * 2.4 + 1.2;    // Meteor head radius
+        this.alpha = Math.random() * 0.7 + 0.3;   // Opacity
+        this.life = 0;
+        this.maxLife = Math.random() * 90 + 70;
+        this.colorHead = '#ffffff';
+        this.colorMid = Math.random() > 0.45 ? '#38bdf8' : '#c084fc'; // Electric Cyan or Deep Purple glow
+      }
+
+      update() {
+        this.x -= Math.cos(angle) * this.speed;
+        this.y += Math.sin(angle) * this.speed;
+        this.life++;
+
+        if (this.life > this.maxLife * 0.65) {
+          this.alpha -= 0.035;
+        }
+
+        if (this.x < -this.length || this.y > height + this.length || this.alpha <= 0) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        const tailX = this.x + Math.cos(angle) * this.length;
+        const tailY = this.y - Math.sin(angle) * this.length;
+
+        ctx.save();
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = this.colorMid;
+
+        const grad = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
+        grad.addColorStop(0, `rgba(255, 255, 255, ${this.alpha})`);
+        grad.addColorStop(0.3, this.colorMid);
+        grad.addColorStop(1, 'rgba(3, 7, 18, 0)');
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = this.size;
+        ctx.lineCap = 'round';
+
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(tailX, tailY);
+        ctx.stroke();
+
+        ctx.fillStyle = this.colorHead;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size * 1.3, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < shootingStarCount; i++) {
+      shootingStars.push(new ShootingStar());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Render twinkling stars
+      backgroundStars.forEach(star => {
+        star.alpha += star.speed * star.direction;
+        if (star.alpha >= 0.95 || star.alpha <= 0.15) {
+          star.direction *= -1;
+        }
+
+        ctx.save();
+        ctx.shadowBlur = 5;
+        ctx.shadowColor = '#38bdf8';
+        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+
+      // Render shooting stars
+      shootingStars.forEach(star => {
+        star.update();
+        star.draw();
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  })();
+
+  // 2. Toast Notification System
   window.showToast = function(message, icon = 'fa-circle-check') {
     let container = document.getElementById('toast-container');
     if (!container) {
@@ -25,11 +166,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3000);
   };
 
-  // Download Handlers - Ensure immediate downloading feedback for all download buttons
+  // 3. Download Handlers
   const downloadBtns = document.querySelectorAll('.download-exe-trigger, [download], a[href$=".zip"], a[href$=".exe"], a[href$=".py"], a[href$=".txt"]');
   
   downloadBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', () => {
       const href = btn.getAttribute('href');
       const filename = btn.getAttribute('download') || (href ? href.split('/').pop() : '');
 
@@ -41,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Copy Code Functionality
+  // 4. Copy Code Functionality
   window.copyCode = function(text, buttonElement) {
     navigator.clipboard.writeText(text).then(() => {
       const originalText = buttonElement.innerHTML;
@@ -58,70 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // Simulation Scan Inspector
-  const startDemoBtn = document.getElementById('start-demo-btn');
-  const demoTerminal = document.getElementById('demo-terminal');
-  const demoProgressBar = document.getElementById('demo-progress-fill');
-
-  if (startDemoBtn && demoTerminal) {
-    let isRunning = false;
-
-    const scanSteps = [
-      { text: "[INIT] Initializing Cachey v3.3 Detector Engine...", delay: 200 },
-      { text: "[AUDIT] Launching Safety Confirmation Modal & File Target Audit...", delay: 400 },
-      { text: "[CHECK] Verifying file target list, caution item badges, and safety confirmation checkbox...", delay: 650 },
-      { text: "[MEM] Invoking Win32 EmptyWorkingSet API across 42 active background processes...", delay: 950 },
-      { text: "[OK]  RAM Working Set Flushed. Reclaimed 2.4 GB unallocated physical memory.", delay: 1250 },
-      { text: "[GPU] Scanning graphics shader pipelines (NVIDIA DXCache, AMD DxCache, DirectX D3DSCache)...", delay: 1550 },
-      { text: "[OK]  Purged 8.7 GB compiled graphics shader cache files.", delay: 1850 },
-      { text: "[NET] Purging Windows DNS Resolver Cache (ipconfig /flushdns)...", delay: 2150 },
-      { text: "[OK]  Windows DNS Resolver Cache successfully flushed.", delay: 2400 },
-      { text: "[DEV] Scanning developer repositories (NPM, Yarn, Pip, UV, Poetry, Cargo, Gradle)...", delay: 2700 },
-      { text: "[OK]  Purged NPM cache (.npm/_cacache): 12.3 GB reclaimed.", delay: 3000 },
-      { text: "[OK]  Purged Pip Wheel & PyPI HTTP downloads: 4.8 GB reclaimed.", delay: 3300 },
-      { text: "[OK]  Purged Cargo registry & Go build cache: 6.2 GB reclaimed.", delay: 3600 },
-      { text: "[REG] Cross-matching Windows Registry against %AppData% leftover directories...", delay: 3900 },
-      { text: "[OK]  Removed 3 uninstalled application orphan directories (1.5 GB).", delay: 4200 },
-      { text: "[DONE] Execution Complete. Reclaimed 33.5 GB Disk Space | RAM Freed: 2.4 GB", delay: 4500 }
-    ];
-
-    startDemoBtn.addEventListener('click', () => {
-      if (isRunning) return;
-      isRunning = true;
-      startDemoBtn.disabled = true;
-      startDemoBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Executing Engine...`;
-      demoTerminal.innerHTML = '';
-      demoProgressBar.style.width = '0%';
-
-      scanSteps.forEach((step, index) => {
-        setTimeout(() => {
-          const line = document.createElement('div');
-          line.className = 'cli-line-item';
-          if (step.text.includes('[OK]') || step.text.includes('[DONE]')) {
-            line.style.color = '#34d399';
-            line.style.fontWeight = '600';
-          } else if (step.text.includes('[INIT]') || step.text.includes('[MEM]')) {
-            line.style.color = '#38bdf8';
-          } else {
-            line.style.color = '#94a3b8';
-          }
-          line.textContent = step.text;
-          demoTerminal.appendChild(line);
-          demoTerminal.scrollTop = demoTerminal.scrollHeight;
-
-          const progressPercent = Math.min(100, Math.round(((index + 1) / scanSteps.length) * 100));
-          demoProgressBar.style.width = `${progressPercent}%`;
-
-          if (index === scanSteps.length - 1) {
-            isRunning = false;
-            startDemoBtn.disabled = false;
-            startDemoBtn.innerHTML = `<i class="fa-solid fa-rotate"></i> Re-execute Simulation`;
-            showToast('Simulation complete. 33.5 GB reclaimed!', 'fa-circle-check');
-          }
-        }, step.delay);
-      });
-    });
-  // Mobile Navigation Drawer Toggle
+  // 5. Mobile Navigation Drawer Toggle
   const navToggle = document.getElementById('nav-toggle');
   const navMenu = document.getElementById('nav-menu');
 
@@ -135,7 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Close mobile menu on clicking any navigation link
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('active');
@@ -144,7 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
       if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
         navMenu.classList.remove('active');
